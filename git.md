@@ -19,3 +19,15 @@
    .git目录即为本地仓库，index文件中存在着git add暂存的内容 git log 可以看到提交历史。
 
    **staging area**：暂存区（汇集待提交的文件改动的地方）git add 命令将文件从未跟踪状态转变为staged已暂存状态。
+
+   ![image-20220725213303650](C:\Users\吴龙照\AppData\Roaming\Typora\typora-user-images\image-20220725213303650.png)
+
+`origin/master` 的中的 `origin` 是远端仓库的名称，是你在用 `clone` 指令初始化本地仓库时 Git 自动帮你起的默认名称；`master` 是 `origin` 上的分支名称。不过对于现在来说，可以暂时把 `origin/master` 简单理解为「中央仓库」。上面图片中也就是在说本地仓库已经领先中央仓库两个提交了。
+
+git add 改动文件提交至暂存区  git status 查看当前状态  git log查看提交历史 git commit 提交至本地仓库 git push 推送至远程中央仓库。
+
+![image-20220725214125724](C:\Users\吴龙照\AppData\Roaming\Typora\typora-user-images\image-20220725214125724.png)
+
+push冲突：远程仓库含有本地没有的commits，会导致本地git push失败。这是因为 Git 的`push` 其实是用本地仓库的 commits 记录去覆盖远端仓库的 commits 记录（注：这是简化概念后的说法，push 的实质和这个说法略有不同），而如果在远端仓库含有本地没有的 commits 的时候，`push` （如果成功）将会导致远端的 commits 被擦掉。这种结果当然是不可行的，因此 Git 会在 `push` 的时候进行检查，如果出现这样的情况，push 就会失败。
+
+push前先pull，**先用 `pull` 把远端仓库上的新内容取回到本地和本地合并，然后再把合并后的本地仓库向远端仓库推送**。
